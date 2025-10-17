@@ -8,28 +8,28 @@ const TalentPool = () => {
       country: 'India',
       professionals: '650+',
       specialty: 'Tech & Finance',
-      image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' // Modern tech office workspace
+      image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
     {
       city: 'Chennai',
       country: 'India',
       professionals: '420+',
       specialty: 'Legal & Accounting',
-      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' // Legal / accounting professionals at work
+      image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
     {
       city: 'Hyderabad',
       country: 'India',
       professionals: '380+',
       specialty: 'Tech & Marketing',
-      image: 'https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' // Marketing & tech collaboration
+      image: 'https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     },
     {
       city: 'Kochi',
       country: 'India',
       professionals: '290+',
       specialty: 'Finance & Admin',
-      image: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' // Finance / admin teamwork
+      image: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     }
   ];
 
@@ -47,12 +47,12 @@ const TalentPool = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {locations.map((location, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+            <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group hover:border-yellow-400 border-2 border-transparent">
               <div className="h-48 overflow-hidden">
                 <img 
                   src={location.image}
                   alt={`${location.city} professionals`}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="p-6">
@@ -61,7 +61,7 @@ const TalentPool = () => {
                     <div className="font-bold text-black text-lg">{location.city}</div>
                     <div className="text-gray-600 text-sm">{location.country}</div>
                   </div>
-                  <div className="bg-black text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-medium">
                     {location.professionals}
                   </div>
                 </div>
@@ -84,8 +84,8 @@ const TalentPool = () => {
                   "Proven track record with international clients"
                 ].map((point, index) => (
                   <div key={index} className="flex items-center space-x-4">
-                    <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center flex-shrink-0">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 bg-black rounded-full"></div>
                     </div>
                     <span className="text-gray-700 text-lg">{point}</span>
                   </div>
@@ -94,11 +94,11 @@ const TalentPool = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" // Professional South Indian team collaboration
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                 alt="Professional South Indian team"
                 className="rounded-2xl shadow-lg"
               />
-              <div className="absolute -bottom-6 -right-6 bg-black text-white p-6 rounded-2xl shadow-2xl">
+              <div className="absolute -bottom-6 -right-6 bg-yellow-400 text-black p-6 rounded-2xl shadow-2xl">
                 <div className="text-3xl font-bold">85%</div>
                 <div className="text-sm">From South India</div>
               </div>

@@ -2,32 +2,68 @@
 import React, { useState } from 'react';
 
 const Services = () => {
-  const [activeCategory, setActiveCategory] = useState('Accounting & Finance');
+  const [activeCategory, setActiveCategory] = useState('Property Assistants');
 
   const categories = {
-    'Accounting & Finance': {
-      roles: ['Chartered Accountants', 'Bookkeepers', 'Financial Analysts', 'Tax Specialists'],
-      description: 'Fully qualified accounting professionals for all your financial operations',
-      averageCost: '£1,200-£2,500/month',
+    'Property Assistants': {
+      roles: ['Property Management', 'Tenant Coordination', 'Listing Management', 'Administrative Support'],
+      description: 'Professional assistants specialized in property management and real estate support',
+      averageCost: '£800-£1,800/month',
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Personal Assistants': {
+      roles: ['Executive Support', 'Calendar Management', 'Travel Arrangements', 'Personal Errands'],
+      description: 'Dedicated personal assistants for executive and personal support tasks',
+      averageCost: '£700-£1,600/month',
+      image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Social Media Management': {
+      roles: ['Content Creation', 'Community Management', 'Strategy Planning', 'Analytics Reporting'],
+      description: 'Social media experts to grow your online presence and engagement',
+      averageCost: '£900-£2,000/month',
+      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Call Centre': {
+      roles: ['Inbound Calls', 'Customer Service', 'Order Processing', 'Technical Support'],
+      description: 'Professional call center agents for customer support and service',
+      averageCost: '£600-£1,400/month',
+      image: 'https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Live Chat Support': {
+      roles: ['Real-time Support', 'Customer Engagement', 'Sales Assistance', 'Technical Help'],
+      description: 'Live chat specialists for instant customer support and engagement',
+      averageCost: '£650-£1,500/month',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Telesales': {
+      roles: ['Lead Generation', 'Sales Calls', 'Appointment Setting', 'Customer Follow-up'],
+      description: 'Skilled telesales professionals to drive your sales and revenue',
+      averageCost: '£700-£1,800/month',
+      image: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Data Entry Services': {
+      roles: ['Data Processing', 'Database Management', 'Record Keeping', 'Data Analysis'],
+      description: 'Accurate data entry specialists for all your information management needs',
+      averageCost: '£500-£1,200/month',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Debt Collection': {
+      roles: ['Account Recovery', 'Payment Follow-up', 'Customer Communication', 'Documentation'],
+      description: 'Professional debt collection agents with excellent communication skills',
+      averageCost: '£800-£2,000/month',
       image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
     },
-    'Legal Services': {
-      roles: ['Corporate Lawyers', 'Legal Researchers', 'Contract Managers', 'Compliance Officers'],
-      description: 'Legal experts specializing in UK and European business law',
-      averageCost: '£1,500-£3,000/month',
-      image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-    },
-    'Digital Marketing': {
-      roles: ['Social Media Managers', 'SEO Specialists', 'Content Strategists', 'PPC Experts'],
-      description: 'Marketing professionals to grow your online presence and revenue',
-      averageCost: '£1,000-£2,200/month',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-    },
-    'Technology': {
-      roles: ['Full-Stack Developers', 'UI/UX Designers', 'Data Analysts', 'IT Support'],
-      description: 'Tech talent for development, design, and digital transformation',
-      averageCost: '£1,400-£3,000/month',
+    'IT Outsourcing': {
+      roles: ['Software Development', 'Technical Support', 'IT Maintenance', 'System Administration'],
+      description: 'IT professionals for development, support, and technical solutions',
+      averageCost: '£1,200-£3,000/month',
       image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    },
+    'Sales Assistants': {
+      roles: ['Customer Assistance', 'Order Processing', 'Product Knowledge', 'Sales Support'],
+      description: 'Sales assistants to support your sales team and customer interactions',
+      averageCost: '£600-£1,500/month',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
     }
   };
 
@@ -36,10 +72,10 @@ const Services = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 md:mb-6">
-            Professional Services
+            Our Professional Services
           </h2>
           <p className="text-lg md:text-xl text-gray-700 px-4">
-            Access highly skilled professionals across all business functions
+            Comprehensive virtual assistant services tailored to your business needs
           </p>
         </div>
 
@@ -48,7 +84,7 @@ const Services = () => {
           <select
             value={activeCategory}
             onChange={(e) => setActiveCategory(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-black font-semibold focus:ring-2 focus:ring-black focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-black font-semibold focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
           >
             {Object.keys(categories).map((category) => (
               <option key={category} value={category}>
@@ -59,15 +95,15 @@ const Services = () => {
         </div>
 
         {/* Desktop Category Tabs */}
-        <div className="hidden md:flex overflow-x-auto space-x-2 pb-4 mb-8 lg:mb-12 scrollbar-hide justify-center">
+        <div className="hidden md:flex flex-wrap gap-2 pb-4 mb-8 lg:mb-12 justify-center">
           {Object.keys(categories).map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`flex-shrink-0 px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-colors duration-200 ${
+              className={`flex-shrink-0 px-4 py-2 rounded-full font-semibold text-sm transition-colors duration-200 ${
                 activeCategory === category
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black border border-gray-300 hover:border-black'
+                  ? 'bg-yellow-400 text-black'
+                  : 'bg-white text-black border border-gray-300 hover:border-yellow-400'
               }`}
             >
               {category}
@@ -89,17 +125,17 @@ const Services = () => {
                 <div className="grid grid-cols-1 gap-2 md:gap-3">
                   {categories[activeCategory].roles.map((role, index) => (
                     <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
-                      <div className="w-2 h-2 bg-black rounded-full flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0"></div>
                       <span className="text-black font-medium text-sm md:text-base">{role}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-black text-white rounded-lg md:rounded-xl p-4 md:p-6">
+              <div className="bg-yellow-400 text-black rounded-lg md:rounded-xl p-4 md:p-6">
                 <div className="font-semibold text-sm md:text-base mb-2">Average Monthly Cost</div>
                 <div className="text-xl md:text-2xl font-bold">{categories[activeCategory].averageCost}</div>
-                <div className="text-gray-300 text-xs md:text-sm mt-1">Full-time dedicated professional</div>
+                <div className="text-yellow-800 text-xs md:text-sm mt-1">Full-time dedicated professional</div>
               </div>
             </div>
 
@@ -110,9 +146,9 @@ const Services = () => {
                 alt={activeCategory}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 bg-white rounded-lg p-3 md:p-4 shadow-lg">
-                <div className="text-lg md:text-2xl font-bold text-black">150+</div>
-                <div className="text-gray-600 text-xs md:text-sm">Professionals Available</div>
+              <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 bg-yellow-400 rounded-lg p-3 md:p-4 shadow-lg">
+                <div className="text-lg md:text-2xl font-bold text-black">100+</div>
+                <div className="text-yellow-800 text-xs md:text-sm">Professionals Available</div>
               </div>
             </div>
           </div>

@@ -39,12 +39,12 @@ const WhyChoose = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {benefits.map((benefit, index) => (
-            <div key={index} className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <div key={index} className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:border-yellow-400 border-2 border-transparent">
               <div className="h-40 md:h-48 overflow-hidden">
                 <img 
                   src={benefit.image} 
                   alt={benefit.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="p-6">
@@ -89,12 +89,12 @@ const WhyChoose = () => {
                   { role: 'Marketing Manager', uk: '£42,000', savvy: '£16,800', saving: '60%' },
                   { role: 'Web Developer', uk: '£50,000', savvy: '£20,000', saving: '60%' }
                 ].map((item, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div key={index} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-yellow-400 transition-colors duration-200">
                     <div className="font-medium text-black mb-2 sm:mb-0">{item.role}</div>
                     <div className="flex items-center space-x-4">
                       <div className="text-gray-500 line-through text-sm">£{item.uk}</div>
                       <div className="text-black font-semibold">£{item.savvy}</div>
-                      <div className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
+                      <div className="bg-yellow-400 text-black px-2 py-1 rounded text-xs font-medium">
                         Save {item.saving}
                       </div>
                     </div>
@@ -102,11 +102,11 @@ const WhyChoose = () => {
                 ))}
               </div>
             </div>
-            <div className="bg-black rounded-xl md:rounded-2xl p-8 text-white text-center h-full flex items-center justify-center">
+            <div className="bg-yellow-400 rounded-xl md:rounded-2xl p-8 text-black text-center h-full flex items-center justify-center">
               <div>
                 <div className="text-4xl md:text-5xl font-bold mb-2">60%</div>
                 <div className="text-lg md:text-xl font-semibold">Average Savings</div>
-                <div className="text-gray-300 mt-4 text-sm md:text-base">Yearly cost reduction for our clients</div>
+                <div className="text-yellow-800 mt-4 text-sm md:text-base">Yearly cost reduction for our clients</div>
               </div>
             </div>
           </div>
