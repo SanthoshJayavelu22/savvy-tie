@@ -14,7 +14,7 @@ const CallToAction = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-          <button className="bg-white text-black px-12 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200">
+          <button className="bg-yellow-400 text-black px-12 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200">
             Start Hiring Today
           </button>
           <button className="border-2 border-white text-white px-12 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-black transition-colors duration-200">

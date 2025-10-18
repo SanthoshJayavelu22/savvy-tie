@@ -1,29 +1,23 @@
 // src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import WhyChoose from './components/WhyChoose';
-import OutsourcingBenefits from './components/OutsourcingBenefits';
-import HowItWorks from './components/HowItWorks';
-import Services from './components/Services';
-import TalentPool from './components/TalentPool';
-import Testimonials from './components/Testimonials';
-import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <Hero />
-      <WhyChoose />
-      <OutsourcingBenefits />
-      <HowItWorks />
-      <Services />
-      <TalentPool />
-      <Testimonials />
-      <CallToAction />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
