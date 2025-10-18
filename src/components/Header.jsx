@@ -136,21 +136,41 @@ const Header = () => {
                 Home
               </Link>
               
-              <div className="border-b border-gray-200 pb-2">
-                <div className="font-medium text-black text-sm mb-2">Services</div>
-                <div className="grid grid-cols-1 gap-1 pl-4">
-                  {services.slice(0, 5).map((service, index) => (
-                    <a
-                      key={index}
-                      href={`#${service.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="text-gray-600 hover:text-yellow-500 text-xs transition-colors duration-200 py-1"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {service}
-                    </a>
-                  ))}
-                </div>
-              </div>
+          {/* Mobile Services Dropdown */}
+<div className="border-b border-gray-200 pb-2">
+  <button
+    onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+    className="w-full flex justify-between items-center font-medium text-black text-sm mb-2"
+  >
+    <span>Services</span>
+    <svg
+      className={`w-4 h-4 ml-2 transform transition-transform duration-200 ${
+        isServicesDropdownOpen ? 'rotate-180' : 'rotate-0'
+      }`}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  {isServicesDropdownOpen && (
+    <div className="grid grid-cols-1 gap-1 pl-4">
+      {services.map((service, index) => (
+        <a
+          key={index}
+          href={`#${service.toLowerCase().replace(/\s+/g, '-')}`}
+          className="text-gray-600 hover:text-yellow-500 text-xs transition-colors duration-200 py-1"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          {service}
+        </a>
+      ))}
+    </div>
+  )}
+</div>
+
 
               <Link to="/about-us" className="text-black hover:text-yellow-500 font-medium text-sm transition-colors duration-200 py-2" onClick={() => setIsMobileMenuOpen(false)}>
                 About Us

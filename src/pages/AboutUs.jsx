@@ -85,36 +85,32 @@ const teamMembers = [
 
   return (
     <div className="pt-20">
-      {/* Hero Section with Soft Background Image */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-        {/* Soft Background Image */}
-        <div 
-          className="absolute inset-0 z-0 opacity-10"
-          style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            borderRadius: '20px',
-            margin: '20px',
-            top: '20px',
-            bottom: '20px',
-            left: '20px',
-            right: '20px'
-          }}
-        ></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6">
-              About Savvy Tie
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              Transforming businesses and lives through strategic outsourcing solutions
-            </p>
-          </div>
-        </div>
-      </section>
+  {/* Hero Section (Responsive Fix) */}
+<section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 z-0 opacity-10 rounded-none sm:rounded-2xl"
+    style={{
+      backgroundImage:
+        'url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+  ></div>
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    <div className="text-center">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 sm:mb-6 leading-tight">
+        About <span className="text-yellow-600">Savvy Tie</span>
+      </h1>
+      <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-2">
+        Transforming businesses and lives through strategic outsourcing solutions.
+      </p>
+    </div>
+  </div>
+</section>
+
 
       {/* Founder Story with Enhanced Design */}
       <section className="py-20 bg-white relative">
