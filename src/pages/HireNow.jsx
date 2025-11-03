@@ -1,32 +1,23 @@
-// src/pages/HireNow/HireNow.jsx
 import React, { useState } from 'react';
-import { FaCheck, FaStar, FaClock, FaShield, FaUsers, FaRocket, FaArrowRight, FaPhone, FaCalendar, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import CallToAction from '../components/CallToAction';
+import HowItWorks from '../components/HowItWorks';
+import Testimonials from '../components/Testimonials';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 
 const HireNow = () => {
-  const [activeTab, setActiveTab] = useState('employer');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
     role: '',
-    experience: '',
-    message: '',
-    phone: '',
-    timeline: ''
+    message: ''
   });
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    setFormData({ 
-      name: '', 
-      email: '', 
-      company: '', 
-      role: '', 
-      experience: '', 
-      message: '',
-      phone: '',
-      timeline: ''
-    });
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   const handleChange = (e) => {
@@ -38,605 +29,405 @@ const HireNow = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Handle form submission logic here
     console.log('Form submitted:', formData);
-    // Add form submission logic here
+    // Reset form or show success message
   };
 
-  const benefits = [
+  const roles = [
+    { name: 'Property Assistants', path: '/services/property-assistants' },
+    { name: 'Personal Assistants', path: '/services/personal-assistants' },
+    { name: 'Social Media Management', path: '/services/social-media-management' },
+    { name: 'Call Centre', path: '/services/call-centre' },
+    { name: 'Live Chat Support', path: '/services/live-chat-support' },
+    { name: 'Telesales', path: '/services/telesales' },
+    { name: 'Data Entry Services', path: '/services/data-entry-services' },
+    { name: 'Debt Collection', path: '/services/debt-collection' },
+    { name: 'IT Outsourcing', path: '/services/it-outsourcing' },
+    { name: 'Sales Assistants', path: '/services/sales-assistants' },
+    { name: 'Legal Assistants', path: '/services/legal-assistants' },
+  ];
+
+  const valueProps = [
     {
-      icon: <FaClock className="w-6 h-6" />,
-      title: '48-Hour Matching',
-      description: 'Get matched with pre-vetted assistants within 48 hours'
+      icon: '✅',
+      title: 'Pre-vetted Professionals',
+      description: 'Every candidate undergoes rigorous screening and skill assessment'
     },
     {
-      icon: <FaShield className="w-6 h-6" />,
-      title: 'Risk-Free Trial',
-      description: '30-day risk-free trial with money-back guarantee'
+      icon: '💸',
+      title: 'Cost-effective Hiring',
+      description: 'Save up to 70% on operational costs compared to local hiring'
     },
     {
-      icon: <FaUsers className="w-6 h-6" />,
-      title: 'Dedicated Support',
-      description: 'Personal account manager and 24/7 support'
+      icon: '🕓',
+      title: 'Flexible Working Hours',
+      description: 'Access talent that works according to your business hours'
     },
     {
-      icon: <FaRocket className="w-6 h-6" />,
+      icon: '🌍',
+      title: 'Seamless Communication',
+      description: 'English-proficient professionals with time zone alignment'
+    },
+    {
+      icon: '🔒',
+      title: 'Secure & Reliable',
+      description: 'Protected contracts and guaranteed work delivery'
+    },
+    {
+      icon: '⚡',
       title: 'Quick Onboarding',
-      description: 'Full setup and training completed in 3-5 days'
+      description: 'Get started within 48 hours of selecting your candidate'
     }
   ];
 
-  const processSteps = [
-    {
-      step: '01',
-      title: 'Consultation',
-      description: 'Free 30-minute consultation to understand your needs'
-    },
-    {
-      step: '02',
-      title: 'Matching',
-      description: 'We match you with 3 pre-screened candidates'
-    },
-    {
-      step: '03',
-      title: 'Interviews',
-      description: 'Conduct interviews and select your preferred candidate'
-    },
-    {
-      step: '04',
-      title: 'Onboarding',
-      description: 'Seamless onboarding and training process'
-    }
+  const industries = [
+    { name: 'Legal', count: '50+', icon: '⚖️' },
+    { name: 'Real Estate', count: '35+', icon: '🏠' },
+    { name: 'Healthcare', count: '28+', icon: '🏥' },
+    { name: 'E-commerce', count: '42+', icon: '🛒' },
+    { name: 'Finance', count: '30+', icon: '💳' },
+    { name: 'Technology', count: '45+', icon: '💻' },
+    { name: 'Education', count: '22+', icon: '🎓' },
+    { name: 'Marketing', count: '38+', icon: '📈' }
   ];
 
-  const testimonials = [
+  const faqItems = [
     {
-      name: 'Sarah Mitchell',
-      company: 'TechGrowth Inc',
-      role: 'CEO',
-      content: 'The hiring process was incredibly smooth. We found the perfect marketing assistant in just 3 days!',
-      rating: 5
+      question: "How quickly can I start working with a virtual assistant?",
+      answer: "Most clients are matched with their ideal virtual assistant within 48 hours of completing the onboarding process. Once you submit your requirements, our team will immediately start the matching process and present you with suitable candidates within 24-48 hours."
     },
     {
-      name: 'James Rodriguez',
-      company: 'Global Consulting',
-      role: 'Operations Director',
-      content: 'Savvy Tie transformed our hiring process. 60% cost savings and exceptional talent quality.',
-      rating: 5
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'How quickly can I start with a new assistant?',
-      answer: 'Most clients are matched with qualified candidates within 48 hours, with full onboarding completed in 3-5 business days.'
+      question: "What's the hiring process like?",
+      answer: "We follow a simple 3-step process: 1) Free consultation to understand your specific needs and requirements, 2) Candidate matching where we present you with pre-vetted professionals that fit your criteria, 3) Interviews and onboarding where you can interview selected candidates and we handle all the paperwork and setup."
     },
     {
-      question: 'What is your satisfaction guarantee?',
-      answer: 'We offer a 30-day risk-free trial. If you are not satisfied, we will find a replacement at no additional cost.'
+      question: "Can I change my virtual assistant if needed?",
+      answer: "Yes, we offer a risk-free trial period of 14 days and can reassign you to a different assistant if the first match isn't perfect. Our goal is to ensure you have the right fit for your business needs."
     },
     {
-      question: 'Do you provide training for the assistants?',
-      answer: 'Yes, all assistants undergo comprehensive training and we provide additional role-specific training as needed.'
+      question: "What about data security and confidentiality?",
+      answer: "All our assistants sign comprehensive NDAs and we implement strict security protocols including secure VPN connections, encrypted communication tools, and regular security audits to protect your business information. We comply with international data protection standards."
     },
     {
-      question: 'Can I scale my team up or down?',
-      answer: 'Absolutely! Our flexible model allows you to easily scale your team based on business needs with a 30-day notice period.'
+      question: "Do you provide training for the virtual assistants?",
+      answer: "Yes, we provide initial training on tools and processes, and ongoing support to ensure our assistants meet your specific business requirements. We also facilitate training on your specific business processes during the onboarding phase."
+    },
+    {
+      question: "What kind of support do you provide after hiring?",
+      answer: "We provide dedicated account management, regular performance reviews, and 24/7 operational support. Our team is always available to address any concerns and ensure smooth collaboration between you and your virtual assistant."
+    },
+    {
+      question: "Can I hire multiple virtual assistants for different roles?",
+      answer: "Absolutely! Many of our clients hire multiple assistants for different functions such as administrative tasks, social media management, customer support, and specialized technical roles. We can help you build an entire offshore team."
+    },
+    {
+      question: "What are the working hours and time zone considerations?",
+      answer: "Our virtual assistants can work according to your time zone or have overlapping hours as needed. We offer flexible scheduling options including full-time (40 hours/week), part-time (20 hours/week), and customized hours to match your business requirements."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 z-0"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-transparent z-0"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center justify-center space-x-2 mb-6">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-              <span className="text-yellow-400 text-sm font-medium ml-2">TRUSTED BY 500+ COMPANIES</span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Hire Your Perfect
-              <span className="text-yellow-500 block">Virtual Assistant</span>
-            </h1>
-            
-            <p className="text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl mx-auto">
-              Get matched with pre-vetted professionals in 48 hours. 60% cost savings. 30-day risk-free trial.
-            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button className="bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-400 transition-all duration-200 transform hover:scale-105 flex items-center">
-                Start Hiring Now
-                <FaArrowRight className="ml-2 w-4 h-4" />
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-200 flex items-center">
-                <FaPhone className="mr-2 w-4 h-4" />
-                Book a Call
-              </button>
-            </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-2xl font-bold text-yellow-500 mb-2">48h</div>
-                <div className="text-gray-300 text-sm">Average Match Time</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-yellow-500 mb-2">60%</div>
-                <div className="text-gray-300 text-sm">Cost Savings</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-yellow-500 mb-2">98%</div>
-                <div className="text-gray-300 text-sm">Satisfaction Rate</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-yellow-500 mb-2">30d</div>
-                <div className="text-gray-300 text-sm">Risk-Free Trial</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 z-0 opacity-10 rounded-none sm:rounded-2xl"
+    style={{
+      backgroundImage:
+        'url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+  ></div>
 
-      {/* Benefits Grid */}
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    <div className="text-center">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 sm:mb-6 leading-tight">
+        Hire Now <span className="text-yellow-600">Savvy Tie</span>
+      </h1>
+      <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-2">
+        Connect with top-tier professionals in accounting, marketing, legal, and more
+                handpicked for your business needs.
+      </p>
+    </div>
+  </div>
+</section>
+
+      {/* Why Hire From Us - 6 Grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
               Why Choose Savvy Tie?
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Experience the simplest, most effective way to hire virtual assistants
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              We provide more than just virtual assistants - we deliver reliable, skilled professionals 
+              who become integral parts of your team.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-yellow-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-yellow-100 transition-colors duration-200">
-                  <div className="text-yellow-600">
-                    {benefit.icon}
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {valueProps.map((item, index) => (
+              <div key={index} className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group border-2 border-transparent hover:border-yellow-400">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
+                <h3 className="text-xl font-bold text-black mb-4">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Hiring Process */}
+      {/* Industries We Serve */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Simple 4-Step Process
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              Industries We Serve
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              From consultation to productivity in less than a week
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Trusted by businesses across various industries worldwide
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200 h-full">
-                  <div className="text-2xl font-bold text-yellow-600 mb-4">{step.step}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
-                </div>
-                {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2">
-                    <div className="w-4 h-0.5 bg-yellow-300"></div>
-                  </div>
-                )}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {industries.map((industry, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                <div className="text-3xl mb-3">{industry.icon}</div>
+                <h3 className="text-lg font-semibold text-black mb-2">{industry.name}</h3>
+                <p className="text-yellow-600 font-bold">{industry.count} Clients</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Main Hiring Form */}
+      {/* How It Works Component */}
+      <HowItWorks />
+
+      {/* Roles You Can Hire with Links */}
       <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-            <div className="grid lg:grid-cols-2">
-              {/* Left Content */}
-              <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 p-12 text-white">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Start Hiring Today</h2>
-                <p className="text-yellow-100 text-lg mb-8 leading-relaxed">
-                  Fill out this form and our team will contact you within 2 hours to discuss your requirements and start the matching process.
-                </p>
-                
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <FaCheck className="w-4 h-4 text-yellow-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white">Free Consultation</h4>
-                      <p className="text-yellow-100 text-sm">30-minute strategy session</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <FaCheck className="w-4 h-4 text-yellow-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white">Custom Matching</h4>
-                      <p className="text-yellow-100 text-sm">Tailored candidate selection</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <FaCheck className="w-4 h-4 text-yellow-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white">Quick Start</h4>
-                      <p className="text-yellow-100 text-sm">Begin in 48 hours or less</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8 p-4 bg-yellow-400/20 rounded-lg border border-yellow-400/30">
-                  <div className="flex items-center space-x-3">
-                    <FaPhone className="w-5 h-5 text-yellow-300" />
-                    <div>
-                      <p className="font-semibold">Prefer to talk?</p>
-                      <p className="text-yellow-100 text-sm">Schedule a call with our hiring specialist</p>
-                    </div>
-                  </div>
-                  <button className="w-full mt-4 bg-white text-yellow-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center">
-                    <FaCalendar className="mr-2 w-4 h-4" />
-                    Schedule Call
-                  </button>
-                </div>
-              </div>
-
-              {/* Right Form */}
-              <div className="p-12">
-                <div className="flex border-b border-gray-200 mb-8">
-                  <button
-                    className={`flex-1 py-4 font-semibold text-center transition-colors duration-200 ${
-                      activeTab === 'employer'
-                        ? 'text-yellow-600 border-b-2 border-yellow-600'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                    onClick={() => handleTabChange('employer')}
-                  >
-                    I'm Hiring
-                  </button>
-                  <button
-                    className={`flex-1 py-4 font-semibold text-center transition-colors duration-200 ${
-                      activeTab === 'candidate'
-                        ? 'text-yellow-600 border-b-2 border-yellow-600'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                    onClick={() => handleTabChange('candidate')}
-                  >
-                    I'm Applying
-                  </button>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {activeTab === 'employer' ? (
-                    <>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                          <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="Your full name"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Work Email *</label>
-                          <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="your@company.com"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
-                          <input
-                            type="text"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="Your company name"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                          <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="+1 (555) 000-0000"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Role Needed *</label>
-                        <select
-                          name="role"
-                          value={formData.role}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                        >
-                          <option value="">Select a role</option>
-                          <option value="virtual-assistant">Virtual Assistant</option>
-                          <option value="customer-support">Customer Support</option>
-                          <option value="social-media">Social Media Manager</option>
-                          <option value="data-entry">Data Entry Specialist</option>
-                          <option value="property-assistant">Property Assistant</option>
-                          <option value="sales-assistant">Sales Assistant</option>
-                          <option value="it-support">IT Support</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Timeline to Hire</label>
-                        <select
-                          name="timeline"
-                          value={formData.timeline}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                        >
-                          <option value="">Select timeline</option>
-                          <option value="immediately">Immediately</option>
-                          <option value="1-week">Within 1 week</option>
-                          <option value="2-weeks">Within 2 weeks</option>
-                          <option value="1-month">Within 1 month</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Specific Requirements</label>
-                        <textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          rows="4"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                          placeholder="Tell us about your specific needs, required skills, and any other details..."
-                        ></textarea>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                          <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="Your full name"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                          <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="your@email.com"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Profession *</label>
-                          <input
-                            type="text"
-                            name="role"
-                            value={formData.role}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="e.g., Virtual Assistant, Customer Support"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                          <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                            placeholder="+1 (555) 000-0000"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Experience Level *</label>
-                          <select
-                            name="experience"
-                            value={formData.experience}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                          >
-                            <option value="">Select experience</option>
-                            <option value="entry-level">Entry Level (0-2 years)</option>
-                            <option value="mid-level">Mid Level (2-5 years)</option>
-                            <option value="senior">Senior (5+ years)</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">Availability</label>
-                          <select
-                            name="timeline"
-                            value={formData.timeline}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                          >
-                            <option value="">Select availability</option>
-                            <option value="full-time">Full Time (40 hrs/week)</option>
-                            <option value="part-time">Part Time (20-30 hrs/week)</option>
-                            <option value="flexible">Flexible Hours</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Tell us about yourself</label>
-                        <textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          rows="4"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
-                          placeholder="Describe your skills, experience, and what you're looking for in a role..."
-                        ></textarea>
-                      </div>
-                    </>
-                  )}
-                  
-                  <button
-                    type="submit"
-                    className="w-full bg-yellow-500 text-gray-900 py-4 px-6 rounded-lg font-semibold hover:bg-yellow-400 transition-colors duration-200 flex items-center justify-center"
-                  >
-                    {activeTab === 'employer' ? 'Start Hiring Process' : 'Apply Now'}
-                    <FaArrowRight className="ml-2 w-4 h-4" />
-                  </button>
-                  
-                  <p className="text-gray-500 text-xs text-center">
-                    By submitting, you agree to our privacy policy. We'll contact you within 2 hours.
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Trusted by Industry Leaders
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              Roles You Can Hire
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              See what our clients say about their hiring experience
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Access a diverse pool of skilled professionals across various domains
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <FaStar key={i} className="w-5 h-5 text-yellow-400" />
-                  ))}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {roles.map((role, index) => (
+              <Link 
+                key={index}
+                to={role.path}
+                className="block bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 group hover:border-yellow-400 border-2 border-transparent cursor-pointer hover:transform hover:scale-105"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 bg-yellow-100 rounded-full flex items-center justify-center group-hover:bg-yellow-200 transition-colors duration-300">
+                  <span className="text-2xl">👥</span>
                 </div>
-                <p className="text-gray-700 mb-6 text-lg leading-relaxed">"{testimonial.content}"</p>
-                <div>
-                  <p className="font-bold text-gray-900">{testimonial.name}</p>
-                  <p className="text-gray-600 text-sm">{testimonial.role}, {testimonial.company}</p>
-                </div>
-              </div>
+                <h3 className="text-lg font-semibold text-black group-hover:text-yellow-600 transition-colors duration-300">
+                  {role.name}
+                </h3>
+                <p className="text-gray-500 text-sm mt-2">Learn more →</p>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Testimonials Component */}
+      <Testimonials />
+
+      {/* Hire Now Form */}
+      <section id="hire-form" className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+                Start Hiring Today
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Fill out the form below and we'll connect you with the perfect virtual assistant within 24 hours.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-black text-sm font-medium mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all text-base"
+                    placeholder="Your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-black text-sm font-medium mb-2">
+                    Work Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all text-base"
+                    placeholder="your@company.com"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-black text-sm font-medium mb-2">
+                    Company Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all text-base"
+                    placeholder="Your company name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-black text-sm font-medium mb-2">
+                    Role Needed *
+                  </label>
+                  <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all text-base"
+                  >
+                    <option value="">Select a role</option>
+                    {roles.map((role, index) => (
+                      <option key={index} value={role.name.toLowerCase().replace(/\s+/g, '-')}>
+                        {role.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-black text-sm font-medium mb-2">
+                  Additional Requirements
+                </label>
+                <textarea
+                  name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all text-base"
+                    placeholder="Tell us about your specific needs, preferred working hours, or any other requirements..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-yellow-400 text-black py-4 px-6 rounded-lg font-semibold text-lg hover:bg-yellow-500 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              >
+                Get Free Consultation
+              </button>
+              
+              <p className="text-gray-500 text-sm text-center">
+                By submitting, you agree to our terms. We'll contact you within 24 hours.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section with Toggle */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-600">Everything you need to know about hiring with Savvy Tie</p>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to know about hiring virtual assistants with Savvy Tie
+            </p>
           </div>
-          
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b border-gray-200 pb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+
+          <div className="space-y-4">
+            {faqItems.map((faq, index) => (
+              <div 
+                key={index}
+                className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg"
+              >
+                <button
+                  className="w-full px-6 py-6 text-left flex items-center justify-between focus:outline-none"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <h3 className="text-lg font-semibold text-black pr-4">
+                    {faq.question}
+                  </h3>
+                  <div className="flex-shrink-0 ml-4">
+                    {openFaqIndex === index ? (
+                      <ChevronUpIcon className="w-5 h-5 text-gray-600" />
+                    ) : (
+                      <ChevronDownIcon className="w-5 h-5 text-gray-600" />
+                    )}
+                  </div>
+                </button>
+                
+                <div 
+                  className={`px-6 pb-6 transition-all duration-300 ${
+                    openFaqIndex === index ? 'block' : 'hidden'
+                  }`}
+                >
+                  <p className="text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
 
+          {/* Additional Help CTA */}
           <div className="text-center mt-12">
             <div className="bg-yellow-50 rounded-2xl p-8 border border-yellow-200">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Still have questions?</h3>
-              <p className="text-gray-600 mb-6">Our hiring specialists are here to help you find the perfect match.</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-yellow-500 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors duration-200 flex items-center justify-center">
-                  <FaPhone className="mr-2 w-4 h-4" />
-                  Call Us Now
-                </button>
-                <button className="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-yellow-500 hover:text-yellow-600 transition-colors duration-200 flex items-center justify-center">
-                  <FaEnvelope className="mr-2 w-4 h-4" />
-                  Email Us
-                </button>
-              </div>
+              <h3 className="text-2xl font-bold text-black mb-4">
+                Still have questions?
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Our team is here to help you find the perfect virtual assistant for your needs.
+              </p>
+              <button 
+                onClick={() => document.getElementById('hire-form').scrollIntoView({ behavior: 'smooth' })}
+                className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-colors duration-200"
+              >
+                Contact Our Team
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Find Your Perfect Assistant?
-          </h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-            Join 500+ companies that have transformed their operations with Savvy Tie virtual assistants.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-400 transition-all duration-200 transform hover:scale-105">
-              Start Hiring Now
-            </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-200">
-              View Case Studies
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* Call to Action Footer */}
+      <CallToAction />
     </div>
   );
 };

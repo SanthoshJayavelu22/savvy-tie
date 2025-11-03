@@ -18,7 +18,10 @@ import ITOutsourcing from './pages/ServiceDetail/ITOutsourcing';
 import SalesAssistants from './pages/ServiceDetail/SalesAssistants';
 import LegalAssistants from './pages/ServiceDetail/LegalAssistants';
 import ContactUs from './pages/ContactUs';
-// import HireNow from './pages/HireNow';
+import HireNow from './pages/HireNow';
+import Jobs from './pages/Jobs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   return (
@@ -42,9 +45,12 @@ function App() {
           <Route path="/services/sales-assistants" element={<SalesAssistants />} />
           <Route path="/services/legal-assistants" element={<LegalAssistants />} />
 
-           {/* <Route path="/hire-now" element={<HireNow/>} /> */}
+           <Route path="/hire-now" element={<HireNow/>} />
+                 <Route path="/jobs" element={<Jobs/>} />
 
              <Route path="/contact-us" element={<ContactUs/>} />
+             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
         <Footer />
       </div>

@@ -1,6 +1,8 @@
 // src/components/Footer.jsx
 import React from 'react';
-import logo from '../assets/images/logo.jpg'
+import { Link } from 'react-router-dom';
+import logo from '../assets/images/logo.jpg';
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
@@ -8,10 +10,6 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              {/* <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">ST</span>
-              </div>
-              <span className="text-2xl font-bold">SavvyTie</span> */}
               <img src={logo} alt="SavvyTie Logo" className="h-12 w-auto"/>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -34,9 +32,21 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-6 text-lg">Company</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              {['Home','About Us', 'Services', 'Hire Now','Jobs', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-white transition-colors duration-200">{item}</a>
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'About Us', path: '/about' },
+                { name: 'Services', path: '/services' },
+                { name: 'Hire Now', path: '/hire-now' },
+                { name: 'Jobs', path: '/jobs' },
+                { name: 'Contact', path: '/contact' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link 
+                    to={item.path} 
+                    className="hover:text-white transition-colors duration-200"
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -59,11 +69,18 @@ const Footer = () => {
           </div>
           <p className='text-gray-400 text-sm'>Developed By: Santhosh Jayavelu</p>
           <div className="flex space-x-8 mt-4 md:mt-0">
-            {['Privacy Policy', 'Terms of Service'].map((item) => (
-              <a key={item} href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
-                {item}
-              </a>
-            ))}
+            <Link 
+              to="/privacy-policy" 
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
+            >
+              Privacy Policy
+            </Link>
+            <Link 
+              to="/terms-of-service" 
+              className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
+            >
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
